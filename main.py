@@ -108,7 +108,7 @@ def create_pagination_info(offset: int, limit: int, total_count: int) -> PageInf
 # API Endpoints
 
 @app.post("/products", response_model=ProductResponse, status_code=201)
-async def create_product(product: Product):
+def create_product(product: Product):
     """
     Create a new product
     """
@@ -125,7 +125,7 @@ async def create_product(product: Product):
         raise HTTPException(status_code=500, detail=f"Failed to create product: {str(e)}")
 
 @app.get("/products", response_model=ProductListResponse)
-async def list_products(
+def list_products(
     name: Optional[str] = Query(None, description="Filter by product name (supports regex)"),
     size: Optional[str] = Query(None, description="Filter by available size"),
     limit: int = Query(10, ge=1, le=100, description="Number of products to return"),
@@ -168,7 +168,7 @@ async def list_products(
         raise HTTPException(status_code=500, detail=f"Failed to fetch products: {str(e)}")
 
 @app.post("/orders", response_model=OrderResponse, status_code=201)
-async def create_order(order: CreateOrder):
+def create_order(order: CreateOrder):
     """
     Create a new order
     """
@@ -217,7 +217,7 @@ async def create_order(order: CreateOrder):
         raise HTTPException(status_code=500, detail=f"Failed to create order: {str(e)}")
 
 @app.get("/orders/{user_id}", response_model=OrderListResponse)
-async def get_user_orders(
+def get_user_orders(
     user_id: str,
     limit: int = Query(10, ge=1, le=100, description="Number of orders to return"),
     offset: int = Query(0, ge=0, description="Number of orders to skip")
@@ -290,7 +290,7 @@ async def get_user_orders(
 
 # Health check endpoint
 @app.get("/health")
-async def health_check():
+def health_check():
     """Health check endpoint"""
     try:
         db.command("ping")
@@ -300,7 +300,7 @@ async def health_check():
 
 # Root endpoint
 @app.get("/")
-async def root():
+def root():
     """Root endpoint with API information"""
     return {
         "message": "Ecommerce API",
