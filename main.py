@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # MongoDB connection
-MONGODB_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017")
+MONGODB_URL = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 DATABASE_NAME = os.getenv("DATABASE_NAME", "ecommerce_db")
 
 client = MongoClient(MONGODB_URL)
