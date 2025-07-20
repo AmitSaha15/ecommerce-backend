@@ -8,15 +8,16 @@ from pydantic import BaseModel, Field, validator
 from pymongo import MongoClient
 import uvicorn
 from dotenv import load_dotenv
+import certifi
 
 # load environment variables
 load_dotenv()
 
 # MongoDB connection
-MONGODB_URL = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-DATABASE_NAME = os.getenv("DATABASE_NAME", "ecommerce_db")
+MONGODB_URL = os.getenv("MONGODB_URI")
+DATABASE_NAME = os.getenv("DATABASE_NAME")
 
-client = MongoClient(MONGODB_URL)
+client = MongoClient(MONGODB_URL, tlsCAFile=certifi.where())
 db = client[DATABASE_NAME]
 
 # collections
