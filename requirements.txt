@@ -1,6 +1,5 @@
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-pymongo==4.6.0
-python-dotenv==1.0.0
-pydantic==2.5.0
-gunicorn
+fastapi==0.111.0
+uvicorn==0.30.1
+gunicorn==22.0.0
+pymongo[srv]==4.6.3
+python-dotenv==1.0.1
